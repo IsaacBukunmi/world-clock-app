@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Isaac Adetona">
+  <!-- <meta http-equiv="refresh" content="60" /> -->
+
+  <title>World Clock</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- General CSS -->
+  <link href="style.css" rel="stylesheet">
+
+   <!-- Google Font -->
+   
+
+ 
+
+</head>
+
+<body id="time-body">
+
+
+    <div class="world-clock-container container">
+        <h1 class="text-center"><img class="pr-3 clock-image" src="./images/clock-white.png" alt="">WORLD CLOCK <img class="pl-2  clock-image" src="./images/clock-white.png" alt=""></h1>
+        <p class="text-center welcome-text">Welcome! Your location is <span id="ip-location"></span> and your local time is <span id="ip-time"></span></p>
+        <div class="input-container">    
+            <input type="text" id="search"class="form-control mr-5" placeholder="Search for any city..." style="width:50%;" autocomplete="off">
+            <button class="btn"> <img src="./images/place.png" alt=""><span class="pl-2"> Add City</span></button>  
+        </div>
+        <div class="match-list pl-3" hidden></div>
+       
+        <div class="clock-container text-center" hidden>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="round-clock">
+                        <div class="inner-round">
+                            <small id="get-city">London</small>
+                            <p id="time">8:21<span>PM</span></p>
+                        </div>
+                    </div>
+                    <!-- <button class="btn btn-primary mt-2" id="add-city">Add Accra</button> -->
+                </div>
+                <div class="col-lg-4">   
+                    <div class="round-clock">
+                        <div class="inner-round">
+                            <small>London</small>
+                            <p id="time">8:21<span>PM</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="round-clock">
+                        <div class="inner-round">
+                            <small>London</small>
+                            <p>8:21<span>PM</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <!-- JQuery -->
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.slim.js"
+  integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI="
+  crossorigin="anonymous"></script>
+  <!-- General JS -->
+  <script src="script.js"></script>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
