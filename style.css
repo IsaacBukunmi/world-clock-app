@@ -59,12 +59,13 @@ body{
     border-radius:3px;
     margin-bottom:2px;
     padding-left:15px;
+    cursor: pointer;
 }
 
 /* .match-list{
     background-color: #ffffff;
     height:60vh;
-    overflow-y: scroll;
+    overflow-y:auto;
 } */
 
 .custom-scrollbar::-webkit-scrollbar {

@@ -54,7 +54,14 @@ function searchCity(searchText){
     .then((res) => res.json())
     .then((cities) => {
 
-        let matchedCities = cities.filter(function(city){
+        const slicedCities = cities.map((item) => {
+            items = item.replace(/_/g, " ")
+            splitItem = items.split("");
+            city = splitItem.slice(items.lastIndexOf('/') + 1).join("");
+            return city
+          });
+
+        let matchedCities = slicedCities.filter(function(city){
             const regex = new RegExp(`^${searchText}`, 'gi');
             return city.match(regex);
         });
@@ -75,22 +82,28 @@ function getSearchValue(){
     searchCity(search.value);
 }
 
+
+
 //Function display search city in HTML
 
 function displaySearchCity(matchedCities){
     if (matchedCities.length > 0){
         const display = matchedCities
             .map(
-                city => `
-            <div class="city-list">
-                ${city}
-            </div>
-            `
-        )
-        .join('');
+                city => 
+                    `
+                    <div class="city-list" id="city-list">
+                        ${city}
+                    </div>
+                    `
+                
+
+        ).join("");
 
         matchList.innerHTML = display;  
+           
     }
 }
+
 
    
