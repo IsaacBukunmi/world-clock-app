@@ -46,46 +46,6 @@ function getLocalDetails(){
 
 getLocalDetails();
 
-function getCityDetails(){
-    fetch(mainUrl)
-    .then((res) => res.json())
-    .then((data) => {
-
-        function getCity(){
-            let slicedCity = data.slice((data.indexOf("Africa/Accra")), (data.indexOf("Africa/Accra")+1));
-            city = slicedCity.join("");
-            return city;
-        }
-
-       
-
-        locateCity.innerHTML =  getCity();   
-    })
-    .catch((error) => console.log(error));
-
-    function getTime(){
-        fetch('http://worldtimeapi.org/api/timezone/Africa/Accra/')
-        .then((res) => res.json())
-        .then((data) => {
-
-            function getLocalTime(){
-                let localTime = new Date(data.datetime).toLocaleTimeString(undefined, {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit'
-                })
-    
-                return localTime;
-            }
-
-            displayTime.innerHTML =getLocalTime();
-           
-        })
-
-        .catch((error) => console.log(error));
-    }
-  
-}
 
 // Search Cities and filter it
 
@@ -94,24 +54,17 @@ function searchCity(searchText){
     .then((res) => res.json())
     .then((cities) => {
 
-        let matchedCity = cities.filter(function(city){
+        let matchedCities = cities.filter(function(city){
             const regex = new RegExp(`^${searchText}`, 'gi');
             return city.match(regex);
         });
 
         if (searchText.length === 0){
-            matchedCity=[];
+            matchedCities=[];
+            matchList.innerHTML='';
         }
 
-        // return matchedCity
-
-        if (matchedCity.length > 0){
-            matchedCity.forEach(function(match){
-               console.log(match)
-            })
-            // matchList.innerHTML = displayCity;
-            // console.log(displayCity);
-        }
+       displaySearchCity(matchedCities);
 
     }) 
     .catch((error) => console.log(error));
@@ -122,12 +75,22 @@ function getSearchValue(){
     searchCity(search.value);
 }
 
-// function displaySearchCity(matchedCity){
-//     if (matchedCity.length > 0){
-//         matchedCity.forEach(function(match){
-//             console.log(match)
-//         })
-//     }
-// }
+//Function display search city in HTML
+
+function displaySearchCity(matchedCities){
+    if (matchedCities.length > 0){
+        const display = matchedCities
+            .map(
+                city => `
+            <div class="city-list">
+                ${city}
+            </div>
+            `
+        )
+        .join('');
+
+        matchList.innerHTML = display;  
+    }
+}
 
    
