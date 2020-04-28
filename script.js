@@ -78,6 +78,7 @@ const searchCity = (searchText) => {
         }
 
        displaySearchCity(matchedCities);
+      
 
     }) 
     .catch((error) => console.log(error));
@@ -95,20 +96,40 @@ function getSearchValue(){
 function displaySearchCity(matchedCities){
     if (matchedCities.length > 0){
         const display = matchedCities
-            .map(
-                city => 
-                    `
-                    <div class="city-list" id="city-list">
-                        ${city}
-                    </div>
-                    `      
+            .map( 
+                city => {
 
+                    
+                const citydisp =
+                `
+                <div class="city-list" id="city-list">
+                    ${city}
+                </div>
+                `  ;
+               
+                return citydisp;
+
+                }    
+                         
         ).join("");
 
-        matchList.innerHTML = display;  
+       
+        // console.log(display);
+        
+        matchList.innerHTML = display; 
+        document.getElementById("city-list").onclick = () => {
+            search.value = `${city}`;
+        } 
+
+         
            
     }
 }
+
+
+
+
+
 
 
    

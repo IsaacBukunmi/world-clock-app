@@ -29,12 +29,12 @@
 
     <div class="world-clock-container container">
         <h1 class="text-center"><img class="pr-3 clock-image" src="./images/clock-white.png" alt="">WORLD CLOCK <img class="pl-2  clock-image" src="./images/clock-white.png" alt=""></h1>
-        <p class="text-center welcome-text">Welcome! Your location is <span id="ip-location"></span> and your local time is <span id="ip-time"></span></p>
+        <p class="text-center welcome-text">Welcome! Your location is <span id="ip-location">...</span> and your local time is <span id="ip-time">...</span></p>
         <div class="input-container "> 
             <div class="row ">
                 <div class="col-lg-9">  
                     <input type="text" id="search"class="form-control mr-5" placeholder="Search for any city..." style="width:100%;" autocomplete="off">
-                    <div class="mt-2 match-list" id="match-list"></div>
+                    <div class="mt-2 match-list custom-scrollbar" id="match-list"></div>
                 </div>
                 <div class="col-lg-3">
                     <button class="btn"> <img src="./images/place.png" alt=""><span class="pl-2"> Add City</span></button>
