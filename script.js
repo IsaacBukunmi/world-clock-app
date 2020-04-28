@@ -7,7 +7,9 @@ const displayTime =document.getElementById("display-time");
 
 const search = document.getElementById("search");
 const matchList = document.getElementById("match-list");
-search.addEventListener('input', getSearchValue)
+
+search.addEventListener('input', getSearchValue);
+
 
 
 
@@ -98,7 +100,6 @@ function displaySearchCity(matchedCities){
         const display = matchedCities
             .map( 
                 city => {
-
                     
                 const citydisp =
                 `
@@ -117,15 +118,14 @@ function displaySearchCity(matchedCities){
         // console.log(display);
         
         matchList.innerHTML = display; 
+
         document.getElementById("city-list").onclick = () => {
             search.value = `${city}`;
         } 
-
-         
+            
            
     }
 }
-
 
 
 
