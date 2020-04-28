@@ -7,16 +7,18 @@ const displayTime =document.getElementById("display-time");
 
 const search = document.getElementById("search");
 const matchList = document.getElementById("match-list");
-
 search.addEventListener('input', getSearchValue)
 
 
-function getLocalDetails(){
+
+
+
+const getLocalDetails = () => {
     fetch(ipUrl)
     .then((res) => res.json())
     .then((data) => {
 
-        function getLocalCity(){
+        const getLocalCity = () => {
             let ipTimeZone = data.timezone;
             let ipTimeZoneArr = ipTimeZone.split("");
             let slicedTimeZone = ipTimeZoneArr.slice((ipTimeZoneArr.indexOf("/")+1));
@@ -25,7 +27,7 @@ function getLocalDetails(){
             return city;  
         }
 
-        function getLocalTime(){
+        const getLocalTime = () => {
             let localTime = new Date(data.datetime).toLocaleTimeString(undefined, {
                 hour: '2-digit',
                 minute: '2-digit',
@@ -49,7 +51,7 @@ getLocalDetails();
 
 // Search Cities and filter it
 
-function searchCity(searchText){
+const searchCity = (searchText) => {
     fetch(mainUrl)
     .then((res) => res.json())
     .then((cities) => {
@@ -68,6 +70,10 @@ function searchCity(searchText){
 
         if (searchText.length === 0){
             matchedCities=[];
+            matchList.innerHTML='';
+        }
+
+        if(searchText.value !== matchedCities){
             matchList.innerHTML='';
         }
 
@@ -95,8 +101,7 @@ function displaySearchCity(matchedCities){
                     <div class="city-list" id="city-list">
                         ${city}
                     </div>
-                    `
-                
+                    `      
 
         ).join("");
 
