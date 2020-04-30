@@ -35,6 +35,7 @@ body{
 .input-container{
     width:65%;
     margin: 0 auto;
+    margin-bottom:30px;
 }
 
 .input-container button{
@@ -80,18 +81,27 @@ body{
 .round-clock{
     /* height:250px;
     width:250px; */
-    background-color: #2d2328;
+    background: linear-gradient(to bottom, #280c54 3%, #2a1d37 100%);
+    color: #f2ad1a;
     display: inline-block;
-    padding:40px;
+    width:300px;
+    height:300px;
     border-radius: 50%;
-    border:8px solid #DA7E74;
+    border:10px solid #f2ad1a;
+    padding-top:100px;
+    margin-left:20px;
+
+    -webkit-box-shadow: 6px 5px 5px 0px rgba(13,12,13,0.53);
+    -moz-box-shadow: 6px 5px 5px 0px rgba(13,12,13,0.53);
+    box-shadow: 6px 5px 5px 0px rgba(13,12,13,0.53);
 }
 
-.inner-round{
-    padding:40px;
+/* .inner-round{
+    height:100px;
+    width:100px;
     border-radius: 50%;
     border:1px solid #FFFFFF;
-}
+} */
 
 .inner-round small, p{
     color:#FFFFFF;
@@ -102,10 +112,32 @@ body{
 }
 
 .inner-round p span{
-    font-size:12px;
+    font-size:14px;
 }
 
-#ip-location, #ip-time{
+#ip-location, #ip-time, #check, #check-time{
     color:#f2ad1a;
     font-weight:bold;
 }
+
+.clock-container{
+    position: relative;
+    
+}
+
+.clock-container .overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    transition: 0.5s ease;
+    background-color:#000000;
+    opacity:0;
+}
+
+.clock-container:hover .overlay {
+    opacity: 1;
+  }
