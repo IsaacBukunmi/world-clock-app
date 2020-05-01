@@ -1,0 +1,19 @@
+{
+  "name": "worldclockapp",
+  "version": "1.0.0",
+  "description": "A JS app for displaying time for cities across the world",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsaacBukunmi/world-clock-app.git"
+  },
+  "author": "Isaac Adetona",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IsaacBukunmi/world-clock-app/issues"
+  },
+  "homepage": "https://github.com/IsaacBukunmi/world-clock-app#readme"
+}
