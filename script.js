@@ -1,5 +1,5 @@
-const mainUrl = 'http://worldtimeapi.org/api/timezone/';
-const ipUrl = 'http://worldtimeapi.org/api/ip';
+const mainUrl = 'https://worldtimeapi.org/api/timezone/';
+const ipUrl = 'https://worldtimeapi.org/api/ip';
 const ipLocation = document.getElementById("ip-location");
 const ipTime = document.getElementById("ip-time");
 const locateCity = document.getElementById("get-city");
@@ -124,16 +124,16 @@ function displaySearchCity(matchedCities){
             const new_search = search.value.replace(/ /g, "_");
            
             const regionUrls = [
-                `http://worldtimeapi.org/api/timezone/Africa/${new_search}`,
-                `http://worldtimeapi.org/api/timezone/America/${new_search}`,
-                `http://worldtimeapi.org/api/timezone/Antarctica/${new_search}`,
-                `http://worldtimeapi.org/api/timezone/Asia/${new_search}`,
-                `http://worldtimeapi.org/api/timezone/Atlantic/${new_search}`,
-                `http://worldtimeapi.org/api/timezone/Autstralia/${new_search}`,
-                `http://worldtimeapi.org/api/timezone/Europe/${new_search}`,
-                `http://worldtimeapi.org/api/timezone/Pacific/${new_search}`,
-                `http://worldtimeapi.org/api/timezone/Indian/${new_search}`,
-                `http://worldtimeapi.org/api/timezone/America/Argentina/${new_search}`
+                `https://worldtimeapi.org/api/timezone/Africa/${new_search}`,
+                `https://worldtimeapi.org/api/timezone/America/${new_search}`,
+                `https://worldtimeapi.org/api/timezone/Antarctica/${new_search}`,
+                `https://worldtimeapi.org/api/timezone/Asia/${new_search}`,
+                `https://worldtimeapi.org/api/timezone/Atlantic/${new_search}`,
+                `https://worldtimeapi.org/api/timezone/Autstralia/${new_search}`,
+                `https://worldtimeapi.org/api/timezone/Europe/${new_search}`,
+                `https://worldtimeapi.org/api/timezone/Pacific/${new_search}`,
+                `https://worldtimeapi.org/api/timezone/Indian/${new_search}`,
+                `https://worldtimeapi.org/api/timezone/America/Argentina/${new_search}`
             ]
 
             Promise.all(regionUrls.map(url => 
