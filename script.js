@@ -141,24 +141,18 @@ function displaySearchCity(matchedCities){
 
                 .then((data) => {
 
-                    // console.log(data[1].datetime);
-
                     const getCityTime = () => {
 
                         const getExactCityTime = () => {
 
-                              
-                                    const date =  new Date("" + data[0].datetime);
-                                    let hours = "" + date.getHours();
-                                    let minutes = "" + date.getMinutes();
-                                    let daytime = hours >= 12 ? "PM":"AM";
-                                   
-                                    hours = hours ? hours : 12;
-                                    hours = hours % 12;
-                                    hours = hours.length < 2 ? "0"+ hours:hours;
-                                    minutes = minutes.length < 2 ? "0" + minutes:minutes;
-        
-                                    return `${hours}:${minutes} <span>${daytime}</span>`;                   
+                                const date =  moment.parseZone("" + data[0].datetime);
+                                let hours = "" + date.hours();
+                                let minutes = "" + date.minutes();
+                                let daytime = hours >= 12 ? "PM":"AM";
+                                hours = hours % 12;
+                                hours = hours.length < 2 ? "0" + hours:hours;
+                                hours = hours ? hours : 12;
+                                return `${hours}:${minutes} <span>${daytime}</span>`;                   
                                
                         }
     
@@ -179,6 +173,10 @@ function displaySearchCity(matchedCities){
                         
                         
                         worldTime.innerHTML += getCityTime();
+
+                        const saveworldTime = [...worldTime.innerHTML].map((item) => item);
+                        localStorage.setItem('worldTime', JSON.stringify(saveworldTime));
+                        // console.log(saveworldTime);
                        
                            if(worldTime.childElementCount > 3){
                                 worldTime.innerHTML = getCityTime();
