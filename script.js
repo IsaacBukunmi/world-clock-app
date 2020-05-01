@@ -10,7 +10,7 @@ const matchList = document.getElementById("match-list");
 const addCity = document.getElementById("add-city");
 const check = document.getElementById("check");
 const checkTime = document.getElementById("check-time");
-const worldTime = document.getElementById("world-time")
+const worldTime = document.getElementById("world-time");
 
 search.addEventListener('input', getSearchValue);
 
@@ -82,6 +82,7 @@ const searchCity = (searchText) => {
         if(searchText.value !== matchedCities){
             matchList.innerHTML='';
         }
+
         
         displaySearchCity(matchedCities);
         
@@ -119,80 +120,100 @@ function displaySearchCity(matchedCities){
         });
         
         addCity.onclick = () => {
-            
 
-                const regionUrls = [
-                    `http://worldtimeapi.org/api/timezone/Africa/${search.value}`,
-                    `http://worldtimeapi.org/api/timezone/America/${search.value}`,
-                    `http://worldtimeapi.org/api/timezone/Antarctica/${search.value}`,
-                    `http://worldtimeapi.org/api/timezone/Asia/${search.value}`,
-                    `http://worldtimeapi.org/api/timezone/Atlantic/${search.value}`,
-                    `http://worldtimeapi.org/api/timezone/Autstralia/${search.value}`,
-                    `http://worldtimeapi.org/api/timezone/Europe/${search.value}`,
-                    `http://worldtimeapi.org/api/timezone/Pacific/${search.value}`,
-                    `http://worldtimeapi.org/api/timezone/Indian/${search.value}`
-                ]
+            const new_search = search.value.replace(/ /g, "_");
+           
+            const regionUrls = [
+                `http://worldtimeapi.org/api/timezone/Africa/${new_search}`,
+                `http://worldtimeapi.org/api/timezone/America/${new_search}`,
+                `http://worldtimeapi.org/api/timezone/Antarctica/${new_search}`,
+                `http://worldtimeapi.org/api/timezone/Asia/${new_search}`,
+                `http://worldtimeapi.org/api/timezone/Atlantic/${new_search}`,
+                `http://worldtimeapi.org/api/timezone/Autstralia/${new_search}`,
+                `http://worldtimeapi.org/api/timezone/Europe/${new_search}`,
+                `http://worldtimeapi.org/api/timezone/Pacific/${new_search}`,
+                `http://worldtimeapi.org/api/timezone/Indian/${new_search}`,
+                `http://worldtimeapi.org/api/timezone/America/Argentina/${new_search}`
+            ]
 
-                Promise.all(regionUrls.map(url => 
-                    fetch(url)
-                    .then((res) => res.json())
-                    .catch(error => console.log(error))
-                ))
+            Promise.all(regionUrls.map(url => 
+                fetch(url)
+                .then((res) => res.json())
+                .catch(error => console.log(error))
+            ))
 
-                .then((data) => {
+            .then((data) => {
+                
 
-                    const getCityTime = () => {
+                const getCityTime = () => {
 
-                        const getExactCityTime = () => {
+                    const getExactCityTime = () => {
 
-                                const date =  moment.parseZone("" + data[0].datetime);
-                                let hours = "" + date.hours();
-                                let minutes = "" + date.minutes();
-                                let daytime = hours >= 12 ? "PM":"AM";
-                                hours = hours % 12;
-                                hours = hours.length < 2 ? "0" + hours:hours;
-                                hours = hours ? hours : 12;
-                                return `${hours}:${minutes} <span>${daytime}</span>`;                   
-                               
-                        }
-    
-                            let cityTime = `
-                            <div class="col-lg-4 clock-col" id="clock-col">
-                                <div class="round-clock">
-                                    <div class="inner-round">
-                                        <small id="check">${search.value}</small>
-                                        <p id="check-time">${getExactCityTime()}</p>
-                                    </div>
+                        const timeArr = [
+                            data[0].datetime,
+                            data[1].datetime,
+                            data[2].datetime,
+                            data[3].datetime,
+                            data[4].datetime,
+                            data[5].datetime,
+                            data[6].datetime,
+                            data[7].datetime,
+                            data[8].datetime,
+                            data[9].datetime
+                        ]
+
+                    
+                        const filterTimeArr = timeArr.filter(item =>  item !== undefined)
+
+                        const date =  moment.parseZone("" + filterTimeArr[0]);
+                        let hours = "" + date.hours();
+                        let minutes = "" + date.minutes();
+                        let daytime = hours >= 12 ? "PM":"AM";
+                        hours = hours % 12;
+                        hours = hours.length < 2 ? "0" + hours:hours;
+                        hours = hours ? hours : 12;
+                        return `${hours}:${minutes} <span>${daytime}</span>`;  
+                        
+
+                                        
+                            
+                    }
+
+                        let cityTime = `
+                        <div class="col-lg-4 clock-col" id="clock-col">
+                            <div class="round-clock">
+                                <div class="inner-round">
+                                    <small id="check">${search.value}</small>
+                                    <p id="check-time">${getExactCityTime()}</p>
                                 </div>
                             </div>
-                            `
-                            
-                            return cityTime;
+                        </div>
+                        `
+                        
+                        return cityTime;
+                    }
+
+                    
+                    
+                    worldTime.innerHTML += getCityTime();
+
+                    const saveworldTime = [...worldTime.innerHTML].map((item) => item);
+                    localStorage.setItem('worldTime', JSON.stringify(saveworldTime));
+                    // console.log(saveworldTime);
+                    
+                        if(worldTime.childElementCount > 3){
+                            worldTime.innerHTML = getCityTime();
                         }
 
-                        
-                        
-                        worldTime.innerHTML += getCityTime();
+                        worldTime.ondblclick = (e) => {
+                            e.target.style.display = "none";
+                            // if (e.target.classList.contains('clock-col')){
+                            //     e.target.style.display = "none";
+                            // }
+                        }           
 
-                        const saveworldTime = [...worldTime.innerHTML].map((item) => item);
-                        localStorage.setItem('worldTime', JSON.stringify(saveworldTime));
-                        // console.log(saveworldTime);
-                       
-                           if(worldTime.childElementCount > 3){
-                                worldTime.innerHTML = getCityTime();
-                           }
-    
-                            worldTime.ondblclick = (e) => {
-                                e.target.style.display = "none";
-                                // if (e.target.classList.contains('clock-col')){
-                                //     e.target.style.display = "none";
-                                // }
-                            }
-     
-
-                })
+            })       
         }
-
    
     }
 }

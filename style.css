@@ -6,7 +6,6 @@
 
 body{
 
-    /* background-image: url(./images/high-rise-buildings-during-night-time-photo-219692.jpg); */
     background: linear-gradient(
         rgba(0, 0, 0, 0.1),
         rgba(0, 0, 0, 0.1)
@@ -14,7 +13,7 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-size:cover;
-    height:100vh;
+    min-height:100vh;
     width:100%;
     font-family: 'Open Sans', sans-serif;
     overflow: hidden;
@@ -29,6 +28,10 @@ body{
 
 
 .world-clock-container p.welcome-text{
+    /* padding-bottom:10px; */
+}
+
+.world-clock-container p.note-text{
     padding-bottom:10px;
 }
 
@@ -141,3 +144,26 @@ body{
 .clock-container:hover .overlay {
     opacity: 1;
   }
+  
+
+/* Media Queries */
+
+@media(max-width:990px){
+    body{
+        overflow-y:auto;
+        height:100%;
+    }
+
+    .round-clock{
+        margin-bottom:30px;
+    }
+
+    .input-container button{
+       width:100%;
+    }
+
+    .left-clock-image{
+        display: none;
+    }
+    
+}
