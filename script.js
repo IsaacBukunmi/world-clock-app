@@ -172,6 +172,7 @@ function displaySearchCity(matchedCities){
                         hours = hours % 12;
                         hours = hours.length < 2 ? "0" + hours:hours;
                         hours = hours ? hours : 12;
+                        minutes = minutes.length < 2 ? "0"+minutes:minutes;
                         return `${hours}:${minutes} <span>${daytime}</span>`;  
                         
 
