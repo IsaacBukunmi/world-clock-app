@@ -195,8 +195,14 @@ function displaySearchCity(matchedCities){
                     }
 
                     
+                   console.log(matchedCities);
+                   if(matchedCities.indexOf(search.value) > -1){
+                        worldTime.innerHTML += getCityTime();
+                   }else {
+                       alert("The city you entered does not exist")
+                   }
                     
-                    worldTime.innerHTML += getCityTime();
+                   
 
                     const saveworldTime = [...worldTime.innerHTML].map((item) => item);
                     localStorage.setItem('worldTime', JSON.stringify(saveworldTime));
@@ -211,11 +217,16 @@ function displaySearchCity(matchedCities){
                             // if (e.target.classList.contains('clock-col')){
                             //     e.target.style.display = "none";
                             // }
-                        }           
+                        }   
+                        
+                        // worldTime.addEventListener('dblclick', function(e){
+                        //     if (e.target.classList.contains('clock-col')) {
+                        //         e.target.style.display = "none";
+                        //     }
+                        //  });
 
             })       
-        }
-   
+    }
     }
 }
 
