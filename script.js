@@ -15,7 +15,7 @@ const worldTime = document.getElementById("world-time");
 search.addEventListener('input', getSearchValue);
 
 
-
+populateUI();
 
 
 
@@ -173,11 +173,7 @@ function displaySearchCity(matchedCities){
                         hours = hours.length < 2 ? "0" + hours:hours;
                         hours = hours ? hours : 12;
                         minutes = minutes.length < 2 ? "0"+minutes:minutes;
-                        return `${hours}:${minutes} <span>${daytime}</span>`;  
-                        
-
-                                        
-                            
+                        return `${hours}:${minutes} <span>${daytime}</span>`;                            
                     }
 
                         let cityTime = `
@@ -194,40 +190,44 @@ function displaySearchCity(matchedCities){
                         return cityTime;
                     }
 
-                    
-                   console.log(matchedCities);
                    if(matchedCities.indexOf(search.value) > -1){
                         worldTime.innerHTML += getCityTime();
-                   }else {
+                   } else {
                        alert("The city you entered does not exist")
                    }
-                    
                    
-
-                    const saveworldTime = [...worldTime.innerHTML].map((item) => item);
+                    const saveworldTime = [...worldTime.innerHTML].map(item => [...worldTime.innerHTML].indexOf(item));
                     localStorage.setItem('worldTime', JSON.stringify(saveworldTime));
                     // console.log(saveworldTime);
+                
+                    if(worldTime.childElementCount > 3){
+                        worldTime.innerHTML = getCityTime();
+                    }
+
+                    worldTime.ondblclick = (e) => {
+                        e.target.style.display = "none";
+                    }   
                     
-                        if(worldTime.childElementCount > 3){
-                            worldTime.innerHTML = getCityTime();
-                        }
-
-                        worldTime.ondblclick = (e) => {
-                            e.target.style.display = "none";
-                            // if (e.target.classList.contains('clock-col')){
-                            //     e.target.style.display = "none";
-                            // }
-                        }   
-                        
-                        // worldTime.addEventListener('dblclick', function(e){
-                        //     if (e.target.classList.contains('clock-col')) {
-                        //         e.target.style.display = "none";
-                        //     }
-                        //  });
-
+                    // worldTime.addEventListener('dblclick', function(e){
+                    //     if (e.target.classList.contains('clock-col')) {
+                    //         e.target.style.display = "none";
+                    //     }
+                    //  });
+                   
             })       
     }
     }
 }
 
+//Get Data from local storage and populate UI
+function populateUI(){
+    const timeWorld = JSON.parse(localStorage.getItem('worldTime'));
+    if(timeWorld !== null && timeWorld.length > 0){
+       timeWorld.forEach((item, index) => {
+            if(timeWorld.indexOf(index) > -1){
+                return item;
+            }
+        })
+    }
+}
 
